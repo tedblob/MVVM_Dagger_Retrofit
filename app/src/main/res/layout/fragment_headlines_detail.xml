@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="headline"
+            type="com.commbank.interview.data.remote.response.Headlines" />
+
+        <variable
+            name="viewModel"
+            type="com.commbank.interview.data.model.HeadlinesViewModel" />
+    </data>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.base.MainActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/ten_dp"
+        android:layout_marginEnd="@dimen/ten_dp"
+        android:layout_marginTop="@dimen/ten_dp"
+        android:layout_marginBottom="@dimen/ten_dp">
+
+        <ImageView
+            android:id="@+id/headlinesImageView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:layout_constraintDimensionRatio="1:1"
+            tools:srcCompat="@tools:sample/avatars"
+            app:bindSrcDetail="@{headline.urlToImage}"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/headlinesTextView"
+            style="@style/ListViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="@{headline.title}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headlinesImageView" />
+
+        <TextView
+            android:id="@+id/headlinesTime"
+            style="@style/ListViewDate"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:bindPublishDate="@{headline.publishedAt}"
+            app:layout_constraintTop_toBottomOf="@id/headlinesTextView"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/headlinesDesc"
+            style="@style/ListViewDesc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="@{headline.description}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headlinesTime" />
+
+
+        <TextView
+            android:id="@+id/headlinesContent"
+            style="@style/ListViewContent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="@{headline.content}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headlinesDesc" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_type.xml"
+    app:startDestination="@id/headlinesListFragment">
+    <fragment
+        android:id="@+id/headlinesListFragment"
+        android:name="com.commbank.interview.ui.base.HeadlinesListFragment"
+        android:label="firstFragment"
+        tools:layout="@layout/fragment_headlines_list" >
+        <action
+            android:id="@+id/loadFragment"
+            app:destination="@id/headlinesDetailFragment">
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/headlinesDetailFragment"
+        android:name="com.commbank.interview.ui.base.HeadlinesDetailFragment"
+        android:label="secondFragment"
+        tools:layout="@layout/fragment_headlines_detail">
+        <argument
+            android:name="headlines"
+            app:argType="com.commbank.interview.data.remote.response.Headlines"/>
+    </fragment>
+</navigation>

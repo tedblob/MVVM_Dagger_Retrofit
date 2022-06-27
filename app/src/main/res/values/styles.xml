@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ListViewTitle" parent="Widget.AppCompat.TextView">
+        <item name="android:paddingTop">@dimen/ten_dp</item>
+        <item name="android:paddingBottom">@dimen/ten_dp</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="ListViewDesc" parent="Widget.AppCompat.TextView">
+        <item name="android:paddingTop">@dimen/ten_dp</item>
+        <item name="android:paddingBottom">@dimen/ten_dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ListViewContent" parent="Widget.AppCompat.TextView">
+        <item name="android:paddingTop">@dimen/ten_dp</item>
+        <item name="android:paddingBottom">@dimen/ten_dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ListViewDate" parent="Widget.AppCompat.TextView">
+        <item name="android:paddingTop">@dimen/ten_dp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:paddingBottom">@dimen/ten_dp</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+
+    <style name="Container">
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+    </style>
+
+    <dimen name="ten_dp">10dp</dimen>
+</resources>
