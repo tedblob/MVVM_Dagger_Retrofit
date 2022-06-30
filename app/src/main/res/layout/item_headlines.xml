@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="listener"
+            type="com.commbank.interview.ui.presenters.HeadlinesListItemListener" />
+        <variable
             name="headline"
             type="com.commbank.interview.data.remote.response.Headlines" />
 
@@ -14,6 +17,7 @@
         android:id="@+id/headlinesChildContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{(view)->listener.onClickItem(view, headline)}"
         android:layout_marginTop="@dimen/ten_dp"
         android:layout_marginBottom="@dimen/ten_dp">
 
@@ -63,7 +67,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             tools:srcCompat="@tools:sample/avatars"
-            app:bindSrc="@{headline.urlToImage}"
+            android:src="@{headline.urlToImage}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"

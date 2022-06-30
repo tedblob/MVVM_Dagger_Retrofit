@@ -25,7 +25,11 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            buildConfigField("String", "API_KEY", '"1198217aa14d4a31be94b470f4277c51"')
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField("String", "API_KEY", '"1198217aa14d4a31be94b470f4277c51"')
         }
     }
     compileOptions {
@@ -58,8 +62,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
 
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    implementation 'androidx.test:rules:1.4.0'
+    implementation 'androidx.test:rules:1.4.1-alpha07'
     implementation 'androidx.test.ext:junit-ktx:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-alpha07'
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -97,6 +102,23 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.1")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.6.1")
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
+
+    // Koin testing tools
+    androidTestImplementation "io.insert-koin:koin-test:$koin_version"
+    // Needed JUnit version
+    androidTestImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+    // Optional -- Mockito framework
+    androidTestImplementation "org.mockito:mockito-core:$mockitoVersion"
+    // Optional -- mockito-kotlin
+    androidTestImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
+    // Optional -- Mockk framework
+    androidTestImplementation "io.mockk:mockk:$mockkVersion"
+    // Optional -- Mockito framework
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    // Optional -- mockito-kotlin
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
+    // Optional -- Mockk framework
+    testImplementation "io.mockk:mockk:$mockkVersion"
     // Required -- JUnit 4 framework
     testImplementation "junit:junit:$jUnitVersion"
     // Optional -- Robolectric environment
@@ -107,6 +129,13 @@ dependencies {
     testImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
     // Optional -- Mockk framework
     testImplementation "io.mockk:mockk:$mockkVersion"
+
+    implementation 'androidx.test.espresso:espresso-idling-resource:' + rootProject.espressoVersion
+
+    androidTestImplementation 'org.hamcrest:hamcrest:2.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:$espressoVersion"
+
 }

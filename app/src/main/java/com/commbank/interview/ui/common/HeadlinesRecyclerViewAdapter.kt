@@ -4,17 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.commbank.interview.BR
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.commbank.interview.R
-import com.commbank.interview.data.model.HeadlinesViewModel
 import com.commbank.interview.data.remote.response.Headlines
 import com.commbank.interview.databinding.ItemHeadlinesBinding
+import com.commbank.interview.ui.presenters.HeadlinesListItemListener
 
-class HeadlinesRecyclerViewAdapter(private val onClick: (Headlines) -> Unit) : RecyclerView.Adapter<HeadlinesViewHolder>() {
+class HeadlinesRecyclerViewAdapter(private var headlines: List<Headlines> = emptyList()) : RecyclerView.Adapter<HeadlinesViewHolder>() {
 
-    private var headlines: List<Headlines> = emptyList()
-
+    private val mHeadlinesListItemListener = HeadlinesListItemListener()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HeadlinesViewHolder {
         val binding: ItemHeadlinesBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -22,13 +20,15 @@ class HeadlinesRecyclerViewAdapter(private val onClick: (Headlines) -> Unit) : R
             parent,
             false
         )
+
+        binding.listener = mHeadlinesListItemListener
         return HeadlinesViewHolder(binding)
     }
 
     override fun getItemCount(): Int = headlines.size
 
     override fun onBindViewHolder(holder: HeadlinesViewHolder, position: Int) {
-        holder.bind(onClick, headlines[position])
+        holder.bind(headlines[position])
     }
 
     fun updateItems(headlines: List<Headlines>) {
@@ -39,10 +39,7 @@ class HeadlinesRecyclerViewAdapter(private val onClick: (Headlines) -> Unit) : R
 
 class HeadlinesViewHolder(private val binding: ItemHeadlinesBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(onClick: (Headlines) -> Unit, headline: Headlines) {
+    fun bind(headline: Headlines) {
         binding.setVariable(BR.headline, headline)
-        binding.root.setOnClickListener {
-            onClick(headline)
-        }
     }
 }

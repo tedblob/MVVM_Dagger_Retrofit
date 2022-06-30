@@ -8,9 +8,6 @@
             name="headline"
             type="com.commbank.interview.data.remote.response.Headlines" />
 
-        <variable
-            name="viewModel"
-            type="com.commbank.interview.data.model.HeadlinesViewModel" />
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -30,7 +27,7 @@
             android:layout_height="250dp"
             app:layout_constraintDimensionRatio="1:1"
             tools:srcCompat="@tools:sample/avatars"
-            app:bindSrcDetail="@{headline.urlToImage}"
+            android:src="@{headline.urlToImage}"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

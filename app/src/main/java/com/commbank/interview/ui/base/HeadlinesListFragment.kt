@@ -4,27 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
+
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.commbank.interview.R
 import com.commbank.interview.data.model.HeadlinesViewModel
 import com.commbank.interview.databinding.FragmentHeadlinesListBinding
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 
 
+class HeadlinesListFragment(val factory: (() -> ViewModelProvider.Factory)? = null) : Fragment() {
+    val viewModel: HeadlinesViewModel by activityViewModels()
 
-
-class HeadlinesListFragment : Fragment() {
-    private val viewModel: HeadlinesViewModel by activityViewModels()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,21 +27,16 @@ class HeadlinesListFragment : Fragment() {
 
         val binding: FragmentHeadlinesListBinding = DataBindingUtil.inflate<FragmentHeadlinesListBinding>(inflater, R.layout.fragment_headlines_list, container, false)
 
-        val rootView: SwipeRefreshLayout = binding.swipeRefreshLayout
-        val recyclerview: RecyclerView = binding.headlinesRecyclerView
-        val layoutManager = LinearLayoutManager(this.activity)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+
+        val layoutManager = LinearLayoutManager(this.context)
         val dividerItemDecoration = DividerItemDecoration(
-            recyclerview.context,
+            this.context,
             layoutManager.orientation
         )
-        recyclerview.addItemDecoration(dividerItemDecoration)
-
-        recyclerview.layoutManager = layoutManager
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
-        rootView.setOnRefreshListener {
-            viewModel.getHeadlines()
-        }
+        binding.headlinesRecyclerView.addItemDecoration(dividerItemDecoration)
+        binding.headlinesRecyclerView.layoutManager = layoutManager
 
         return binding.root
     }

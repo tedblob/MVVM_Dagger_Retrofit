@@ -19,7 +19,8 @@ task clean(type: Delete) {
 }
 
 ext {
-
+    espressoVersion = "3.3.0"
+    koin_version = "3.1.6"
     coroutinesVersion = "1.6.0"
     mockkVersion = '1.4.1'
     mockitoKotlinVersion = '3.2.0'
